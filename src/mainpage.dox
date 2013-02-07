@@ -1,0 +1,20 @@
+/**
+\mainpage Train The Teacher
+
+Train The Teacher allows the teacher to learn the students names from pictures.
+To build the program just issue the make command in the source directory.
+You call the program with the path to a configuration file. The file must have the following syntax:
+
+C:\\Path\\To\\Configuration\\File.txt\n
+140 186 24 raw\n
+M-Nr1; Firstname1; Lastname1\n
+M-Nr2; Fristname2; Lastname2\n
+
+The first line specifies the path to the pictures. The pictures have to be in the raw format. 
+The second line specifies the width, the height, the bits per Pixel (24 if you have color, 8 if it's monochrome), the last parameter specifies the file format.
+The following lines include the matriculation number, the first name and the last name separated by semicolons.
+
+In the program you can enter the name of the student and press enter to see if you were correct.
+In a rightclick-menu you can view the negative of the image.
+
+*/
