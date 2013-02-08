@@ -33,6 +33,7 @@ struct Info{
 		int bpp;						//Bit per Pixel
 		struct Student * student; 		//Array of structure student, contains info to every student in the InfoFile
 		int students;					//Number of students in the InfoFile
+		int maxNameLength;				//Maximum length of the Name
 		char ImagePath[200];			//Path to images
 		char format[10];				//Image format(RAW) of the student picture(max 10 characters)
 		char * InfoFilePath;			//Absolute Path to InfoFile(max 100 characters)

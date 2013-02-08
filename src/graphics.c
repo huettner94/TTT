@@ -17,6 +17,7 @@
 static GLubyte *image;
 static int correct;
 static int wrong;
+static int lines;
 static char *text;
 static struct Info *info;
 static struct Student *student;
@@ -34,8 +35,9 @@ void window(struct Info *i) {
 	hasAnswer = false;
 	finish = false;
 	isNegative = false;
+	lines = (info->maxNameLength+6) /27 +1;
 	image = malloc((info->height)*(info->width)*((info->bpp)/8)*sizeof(GLubyte));
-	text = malloc(110*sizeof(char));
+	text = malloc((info->maxNameLength+6)*sizeof(char));
 	if (image == NULL || text == NULL) {
 		fprintf(stderr, "Error allocating memory for Image\n");
 		errno = -1;
@@ -95,11 +97,11 @@ int loadImage() {
 
 void initDisplay() {
 	glutInitWindowPosition(50, 100);
-	glutInitWindowSize(info->width*2, info->height*1.5);
+	glutInitWindowSize(info->width*2, info->height+lines*15+20);
 	glutCreateWindow("TTT");
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glMatrixMode(GL_PROJECTION);
-	gluOrtho2D(0.0, info->width*2, 0.0, info->height*1.5);
+	gluOrtho2D(0.0, info->width*2, 0.0, info->height+lines*15+20);
 
 	glutCreateMenu(menuHandler);
 	glutAddMenuEntry("Negative", 1);
@@ -142,8 +144,8 @@ void makeNegative() {
 
 void keyPressed (unsigned char key, int x, int y) {
 	if ((key >= 32) && (key <= 126) && !hasAnswer) {
-		if (strlen(text) >= 108) {
-			printf("The Text is too long\n");
+		if (strlen(text) >= info->maxNameLength+6) {
+			printf("The is no Student with a name longer than %d Characters\n", info->maxNameLength);
 		} else {
 			sprintf(text, "%s%c", text, key);
 		}
@@ -183,33 +185,33 @@ void drawImage() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 	glPixelZoom(1.0, -1.0);
-	glBitmap(0, 0, 0, 0, info->width*0.5, info->height*1.5-1, NULL);
+	glBitmap(0, 0, 0, 0, info->width*0.5, info->height+lines*15+19, NULL);
 	if (info->bpp/8 == 3) {
 		glDrawPixels(info->width, info->height, GL_RGB, GL_UNSIGNED_BYTE, image);
 	} else {
 		glDrawPixels(info->width, info->height, GL_LUMINANCE, GL_UNSIGNED_BYTE, image);
 	}
-	glBitmap(0, 0, 0, 0, -info->width*0.5, -info->height*1.5+1, NULL);
+	glBitmap(0, 0, 0, 0, -info->width*0.5, -info->height-lines*15-19, NULL);
 
 	glBegin(GL_LINES); //Border left
-	 glVertex2f(info->width*0.5, info->height*0.5-1);
-	 glVertex2f(info->width*0.5, info->height*1.5-1);
+	 glVertex2f(info->width*0.5, lines*15+19);
+	 glVertex2f(info->width*0.5, info->height+lines*15+19);
 	glEnd();
 	glBegin(GL_LINES); //Border bottom
-	 glVertex2f(info->width*0.5-1, info->height*0.5-1);
-	 glVertex2f(info->width*1.5+1, info->height*0.5-1);
+	 glVertex2f(info->width*0.5-1, lines*15+19);
+	 glVertex2f(info->width*1.5+1, lines*15+19);
 	glEnd();
 	glBegin(GL_LINES); //Border right
-	 glVertex2f(info->width*1.5+1, info->height*0.5-1);
-	 glVertex2f(info->width*1.5+1, info->height*1.5-1);
+	 glVertex2f(info->width*1.5+1, lines*15+19);
+	 glVertex2f(info->width*1.5+1, info->height+lines*15+19);
 	glEnd();
 	glBegin(GL_LINES); //Border top
-	 glVertex2f(info->width*0.5-1, info->height*1.5-1);
-	 glVertex2f(info->width*1.5+1, info->height*1.5-1);
+	 glVertex2f(info->width*0.5-1, info->height+lines*15+19);
+	 glVertex2f(info->width*1.5+1, info->height+lines*15+19);
 	glEnd();
 
 	do {
-		glRasterPos2f(info->width*0.1, info->height*0.3 - 15*i);
+		glRasterPos2f(info->width*0.1, (lines-1-i)*15+10);
 		for (j = 0; j < 27 && (i*27+j < (int)strlen(text)); j++) {
 			glutBitmapCharacter(GLUT_BITMAP_9_BY_15, text[i*27+j]);
 		}

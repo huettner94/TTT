@@ -88,6 +88,7 @@ int countStudents() {
 int getStudents() {
 	errno = 0;
 	char s[100];
+	info.maxNameLength = 0;
 
 	if (info.students <= 0) {
 		fprintf(stderr, "No Students in Inputfile");
@@ -125,6 +126,9 @@ int getStudents() {
 				&& (isName(info.student[i].lastname) == 0))) {
 			errno = i + 1;
 			break;
+		}
+		if (strlen(info.student[i].firstname)+strlen(info.student[i].lastname)+1 > info.maxNameLength) {
+			info.maxNameLength = strlen(info.student[i].firstname)+strlen(info.student[i].lastname)+1;
 		}
 	}
 	return errno;
