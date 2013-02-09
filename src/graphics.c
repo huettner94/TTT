@@ -35,9 +35,9 @@ void window(struct Info *i) {
 	hasAnswer = false;
 	finish = false;
 	isNegative = false;
-	lines = (info->maxNameLength+6) /27 +1;
+	lines = ((info->maxNameLength+10)>43 ? info->maxNameLength+10 : 43) /27 +1;
 	image = malloc((info->height)*(info->width)*((info->bpp)/8)*sizeof(GLubyte));
-	text = malloc((info->maxNameLength+6)*sizeof(char));
+	text = malloc(((info->maxNameLength+10)>43 ? info->maxNameLength+10 : 43)*sizeof(char));
 	if (image == NULL || text == NULL) {
 		fprintf(stderr, "Error allocating memory for Image\n");
 		errno = -1;

@@ -11,32 +11,36 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#ifdef _WIN32							//
-#define DELIMITER '\\'					//Changes the delimiter in file paths
-#else									//For Unix-based OS it is '/'
-#define DELIMITER '/'					//For DOS-based OS it is '\\'
-#endif									//
+#ifdef _WIN32
+#define DELIMITER '\\'					///< Delimiter in File path
+#else
+#define DELIMITER '/'					///< Delimiter in File path
+#endif
 
-char * prefix;							//Contains the absolute path to the program(max 500 characters), if there are no paths to the images or to the InfoFile given, then they are searched in this location
+char * prefix;							///< Contains the absolute path to the program(max 500 characters)
 
+/** @brief A Structure for each student.
+ */
 struct Student{
-	char firstname[200];				//First name of student(max 50 characters)
-	char lastname[200];					//Last name of student(max 50 characters)
-	int matnumber;						//Matrikulation number of student
-	bool correct;						//Saves if guessed correctly
+	char firstname[200];				///< The first name of the student
+	char lastname[200];					///< The last name of the student
+	int matnumber;						///< The matrikulation number of the student
+	bool correct;						///< if this Student has been guessed correctly
 };
 
+/** @brief A Structure with general Information
+ */
 struct Info{
-		FILE * InfoFile; 				//File pointer to InfoFile
-		int width;		 				//Width of student picture
-		int height;						//Height of student picture
-		int bpp;						//Bit per Pixel
-		struct Student * student; 		//Array of structure student, contains info to every student in the InfoFile
-		int students;					//Number of students in the InfoFile
-		int maxNameLength;				//Maximum length of the Name
-		char ImagePath[200];			//Path to images
-		char format[10];				//Image format(RAW) of the student picture(max 10 characters)
-		char * InfoFilePath;			//Absolute Path to InfoFile(max 100 characters)
+		FILE * InfoFile;				///< InfoFile File pointer to the InfoFile
+		int width;						///< width The width of the Students picture
+		int height;						///< height The height of the Students picture
+		int bpp;						///< bpp Bits per Pixel in a picture (can only be 8 or 24)
+		struct Student * student;		///< student Array of all students
+		int students;					///< students count of all students
+		int maxNameLength;				///< maxNameLength The size of the longest name
+		char ImagePath[200];			///< ImagePath Path to the images
+		char format[10];				///< format File format
+		char * InfoFilePath;			///< InfoFilePath Absolute Path to the InfoFile
 };
 
 
