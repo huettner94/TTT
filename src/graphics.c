@@ -109,7 +109,7 @@ void initDisplay() {
 }
 
 void checkName() {
-	char name[400];
+	char name[info->maxNameLength];
 	sprintf(name, "%s %s", student->firstname, student->lastname);
 	sscanf(text, "Name: %[^\n]", text);
 	if (strcmp(name, text) == 0) {
