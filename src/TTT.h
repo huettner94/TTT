@@ -19,28 +19,28 @@
 
 char * prefix;							///< Contains the absolute path to the program(max 500 characters)
 
-/** @brief A Structure for each student.
+/** @brief A structure for each student.
  */
 struct Student{
 	char firstname[200];				///< The first name of the student
 	char lastname[200];					///< The last name of the student
 	int matnumber;						///< The matrikulation number of the student
-	bool correct;						///< if this Student has been guessed correctly
+	bool correct;						///< If this %Student has been guessed correctly
 };
 
-/** @brief A Structure with general Information
+/** @brief A structure with general Information
  */
 struct Info{
-		FILE * InfoFile;				///< InfoFile File pointer to the InfoFile
-		int width;						///< width The width of the Students picture
-		int height;						///< height The height of the Students picture
-		int bpp;						///< bpp Bits per Pixel in a picture (can only be 8 or 24)
-		struct Student * student;		///< student Array of all students
-		int students;					///< students count of all students
-		int maxNameLength;				///< maxNameLength The size of the longest name
-		char ImagePath[200];			///< ImagePath Path to the images
-		char format[10];				///< format File format
-		char * InfoFilePath;			///< InfoFilePath Absolute Path to the InfoFile
+		FILE * InfoFile;				///< File pointer to the configuration-file
+		int width;						///< The width of the Student's picture
+		int height;						///< The height of the Student's picture
+		int bpp;						///< Bits per Pixel in a picture (can only be 8 or 24)
+		struct Student * student;		///< Array of all students
+		int students;					///< count of all students
+		int maxNameLength;				///< The length of the longest name
+		char ImagePath[200];			///< Path to the images
+		char format[10];				///< File format
+		char * InfoFilePath;			///< Absolute path to the configuration-file
 };
 
 
@@ -86,7 +86,7 @@ int getImageInfo();
  */
 int getInfoFile();
 
-/** frees memory in TTT.c
+/** Frees allocated memory in TTT.c
  */
 void cleanupMain();
 
