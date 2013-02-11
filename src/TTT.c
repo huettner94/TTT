@@ -223,10 +223,12 @@ int main(int argc, char* argv[]) {
 							}
 						}
 
-						fclose(info.InfoFile);
+						if (fclose(info.InfoFile) != 0) {
+							fprintf(stderr, "Error closing configuration-file.\n");
+						}
 
 					} else {
-						fprintf(stderr, "Error opening info file %s:\n", info.InfoFilePath);
+						fprintf(stderr, "Error opening configuration-file %s:\n", info.InfoFilePath);
 					}
 				} else {
 					printf("File %s does not exist\n", info.InfoFilePath);
