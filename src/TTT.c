@@ -138,15 +138,11 @@ int getImageInfo() {
 	errno = 0;
 	char s[100];
 	fgets(s, 100, info.InfoFile);
-	if (fscanf(info.InfoFile, "%d %d %d %s\n", &info.width, &info.height, &info.bpp, info.format) == 4) {
+	if (fscanf(info.InfoFile, "%d %d %d\n", &info.width, &info.height, &info.bpp) == 3) {
 		if (!((info.height > 0) && (info.height < 10000) && (info.width > 0)
 				&& (info.width < 10000)
 				&& ((info.bpp == 8) || (info.bpp == 24)))) {
 			errno = -1;
-		}
-		if (strcmp(info.format, "raw") != 0) {
-			fprintf(stderr, "Incompatible fileformat %s. Please convert to raw\n", info.format);
-			errno = -2;
 		}
 	} else {
 		errno = -1;

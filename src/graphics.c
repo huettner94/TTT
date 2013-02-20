@@ -64,7 +64,7 @@ void cleanupGraphics() {
 
 int loadImage() {
 	char path[500];
-	if (sprintf(path, "%s%c%d.%s", info->ImagePath, DELIMITER, student->matnumber, info->format) <0) {
+	if (sprintf(path, "%s%c%d.raw", info->ImagePath, DELIMITER, student->matnumber) <0) {
 		fprintf(stderr, "Error generating Path\n");
 		return -1;
 	}

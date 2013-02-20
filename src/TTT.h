@@ -39,7 +39,6 @@ struct Info{
 		int students;					///< count of all students
 		int maxNameLength;				///< The length of the longest name
 		char ImagePath[200];			///< Path to the images
-		char format[10];				///< File format
 		char * InfoFilePath;			///< Absolute path to the configuration-file
 };
 
